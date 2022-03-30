@@ -10,11 +10,9 @@ app.use(cors());
 
 // create user account
 app.get('/account/create/:name/:email/:password', function (req, res) {
-
     // check if account exists
     dal.find(req.params.email).
         then((users) => {
-
             // if user exists, return error message
             if (users.length > 0) {
                 console.log('User already in exists');
@@ -28,17 +26,13 @@ app.get('/account/create/:name/:email/:password', function (req, res) {
                         res.send(user);
                     });
             }
-
         });
 });
 
-
 // login user 
 app.get('/account/login/:email/:password', function (req, res) {
-
     dal.find(req.params.email).
         then((user) => {
-
             // if user exists, check password
             if (user.length > 0) {
                 if (user[0].password === req.params.password) {
@@ -52,12 +46,10 @@ app.get('/account/login/:email/:password', function (req, res) {
                 res.send('Login failed: user not found');
             }
         });
-
 });
 
 // find user account
 app.get('/account/find/:email', function (req, res) {
-
     dal.find(req.params.email).
         then((user) => {
             console.log(user);
@@ -67,7 +59,6 @@ app.get('/account/find/:email', function (req, res) {
 
 // find one user by email - alternative to find
 app.get('/account/findOne/:email', function (req, res) {
-
     dal.findOne(req.params.email).
         then((user) => {
             console.log(user);
@@ -75,10 +66,8 @@ app.get('/account/findOne/:email', function (req, res) {
         });
 });
 
-
 // update - deposit/withdraw amount
 app.get('/account/update/:email/:amount', function (req, res) {
-
     var amount = Number(req.params.amount);
 
     dal.update(req.params.email, amount).
@@ -90,7 +79,6 @@ app.get('/account/update/:email/:amount', function (req, res) {
 
 // all accounts
 app.get('/account/all', function (req, res) {
-
     dal.all().
         then((docs) => {
             console.log(docs);

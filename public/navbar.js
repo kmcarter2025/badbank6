@@ -1,5 +1,5 @@
-function NavBar(){
-  return(
+function NavBar() {
+  return (
 
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="#">BadBank</a>
@@ -25,7 +25,7 @@ function NavBar(){
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#/alldata/">AllData</a>
-          </li>          
+          </li>
         </ul>
       </div>
     </nav>
