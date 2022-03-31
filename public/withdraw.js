@@ -48,9 +48,7 @@ function WithdrawForm(props) {
       });
   }
 
-
   return (<>
-
     Email<br />
     <input type="input"
       className="form-control"
@@ -70,6 +68,5 @@ function WithdrawForm(props) {
       onClick={handle}>
       Withdraw
     </button>
-
   </>);
 }
