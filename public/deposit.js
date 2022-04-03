@@ -29,17 +29,18 @@ function DepositMsg(props) {
 }
 
 function DepositForm(props) {
-  const [email, setEmail] = React.useState('');
   const [amount, setAmount] = React.useState('');
+  const loggedInUser = React.useContext(UserContext)
 
   function handle() {
-    fetch(`/account/update/${email}/${amount}`)
+    fetch(`/account/update/${loggedInUser.email}/${amount}`)
       .then(response => response.text())
       .then(text => {
         try {
           const data = JSON.parse(text);
           props.setStatus(JSON.stringify(data.value));
           props.setShow(false);
+          loggedInUser.balance += parseInt(amount)
           console.log('JSON:', data);
         } catch (err) {
           props.setStatus('Deposit failed')
@@ -49,12 +50,8 @@ function DepositForm(props) {
   }
 
   return (<>
-
-    Email<br />
-    <input type="input"
-      className="form-control"
-      placeholder="Enter email"
-      value={email} onChange={e => setEmail(e.currentTarget.value)} /><br />
+    Balance<br />
+    <h3>${loggedInUser.balance}</h3>
 
     Amount<br />
     <input type="number"

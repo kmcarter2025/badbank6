@@ -1,34 +1,21 @@
 function AllData() {
     const [data, setData] = React.useState([]);
-
-    React.useEffect(() => {
-        // fetch all accounts from API
-        fetch('/account/all')
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                setData(data);
-            });
-    }, []);
+    const loggedInUser = React.useContext(UserContext)
 
     return (
         <>
             <h5>All Data in Store:</h5>
-            {data.map(user => {
-                return (
-                    <div>
-                        <Card
-                            bgcolor="secondary"
-                            header={user.name}
-                            body={<div>
-                                <p>Email: {user.email}</p>
-                                <p>Password: {user.password}</p>
-                                <p>Balance: ${user.balance}</p>
-                            </div>}
-                        />
-                    </div>
-                )
-            })}
+            <div>
+                <Card
+                    bgcolor="secondary"
+                    header={loggedInUser.name}
+                    body={<div>
+                        <p>Email: {loggedInUser.email}</p>
+                        <p>Password: {loggedInUser.password}</p>
+                        <p>Balance: ${loggedInUser.balance}</p>
+                    </div>}
+                />
+            </div>
         </>
     );
 }

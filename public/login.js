@@ -28,6 +28,7 @@ function LoginMsg(props) {
 function LoginForm(props) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const loggedInUser = React.useContext(UserContext)
 
   function handle() {
     fetch(`/account/login/${email}/${password}`)
@@ -37,6 +38,10 @@ function LoginForm(props) {
           const data = JSON.parse(text);
           props.setStatus('');
           props.setShow(false);
+          loggedInUser.name = data.name
+          loggedInUser.email = data.email
+          loggedInUser.password = data.password
+          loggedInUser.balance = data.balance
           console.log('JSON:', data);
         } catch (err) {
           props.setStatus(text)
@@ -45,9 +50,7 @@ function LoginForm(props) {
       });
   }
 
-
   return (<>
-
     Email<br />
     <input type="input"
       className="form-control"
@@ -63,6 +66,5 @@ function LoginForm(props) {
       onChange={e => setPassword(e.currentTarget.value)} /><br />
 
     <button type="submit" className="btn btn-light" onClick={handle}>Login</button>
-
   </>);
 }
