@@ -13,7 +13,6 @@ function AllData() {
 
     return (
         <>
-            <h5>All Data in Store:</h5>
             <div>
                 <Card
                     bgcolor="secondary"
