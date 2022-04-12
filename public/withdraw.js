@@ -29,7 +29,6 @@ function WithdrawMsg(props) {
 }
 
 function WithdrawForm(props) {
-  const [email, setEmail] = React.useState('');
   const [amount, setAmount] = React.useState('');
   const loggedInUser = React.useContext(UserContext)
 
