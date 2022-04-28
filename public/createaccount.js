@@ -29,18 +29,18 @@ function CreateForm(props) {
   const [password, setPassword] = React.useState('');
 
   function handle() {
-    console.log(name, email, password);
-    const url = `/account/create/${name}/${email}/${password}`;
-    (async () => {
-      var res = await fetch(url);
-      var data = await res.json();
-      console.log(data);
-    })();
-    props.setShow(false);
+    if (name && email && password) {
+      const url = `/account/create/${name}/${email}/${password}`;
+      (async () => {
+        var res = await fetch(url);
+        var data = await res.json();
+        console.log(data);
+      })();
+      props.setShow(false);
+    }
   }
 
   return (<>
-
     Name<br />
     <input type="input"
       className="form-control"

@@ -31,23 +31,25 @@ function LoginForm(props) {
   const loggedInUser = React.useContext(UserContext)
 
   function handle() {
-    fetch(`/account/login/${email}/${password}`)
-      .then(response => response.text())
-      .then(text => {
-        try {
-          const data = JSON.parse(text);
-          props.setStatus('');
-          props.setShow(false);
-          loggedInUser.name = data.name
-          loggedInUser.email = data.email
-          loggedInUser.password = data.password
-          loggedInUser.balance = data.balance
-          console.log('JSON:', data);
-        } catch (err) {
-          props.setStatus(text)
-          console.log('err:', text);
-        }
-      });
+    if (email && password) {
+      fetch(`/account/login/${email}/${password}`)
+        .then(response => response.text())
+        .then(text => {
+          try {
+            const data = JSON.parse(text);
+            props.setStatus('');
+            props.setShow(false);
+            loggedInUser.name = data.name
+            loggedInUser.email = data.email
+            loggedInUser.password = data.password
+            loggedInUser.balance = data.balance
+            console.log('JSON:', data);
+          } catch (err) {
+            props.setStatus(text)
+            console.log('err:', text);
+          }
+        });
+    }
   }
 
   return (<>
