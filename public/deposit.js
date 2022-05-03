@@ -33,22 +33,22 @@ function DepositForm(props) {
   const loggedInUser = React.useContext(UserContext)
 
   function handle() {
-    fetch(`/account/update/${loggedInUser.email}/${amount}`)
-      .then(response => response.text())
-      .then(text => {
-        try {
-          const data = JSON.parse(text);
-          props.setStatus('');
-          props.setShow(false);
-          if (amount) {
+    if (parseInt(amount) > 0) {
+      fetch(`/account/update/${loggedInUser.email}/${amount}`)
+        .then(response => response.text())
+        .then(text => {
+          try {
+            const data = JSON.parse(text);
+            props.setStatus('');
+            props.setShow(false);
             loggedInUser.balance += parseInt(amount)
+            console.log('JSON:', data);
+          } catch (err) {
+            props.setStatus('Deposit failed')
+            console.log('err:', text);
           }
-          console.log('JSON:', data);
-        } catch (err) {
-          props.setStatus('Deposit failed')
-          console.log('err:', text);
-        }
-      });
+        })
+    }
   }
 
   return (<>
